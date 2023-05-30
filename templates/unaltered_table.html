@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    <h1>Justin's Workout Tracker</h1>
+    <hr>
+    <table class="table table-success table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Exercise</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Calories</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for table in tables %}
+            <tr>
+                <th scope="row">{{ table.date }}</th>
+                <td>{{ table.exercise }}</td>
+                <td>{{ table.duration }}</td>
+                <td>{{ table.calories }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

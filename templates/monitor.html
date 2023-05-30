@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Justin's Workout Tracker</h1>
+    <hr>
+    <table id="data-table" class="table table-success table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Exercise</th>
+            <th scope="col" id="option-header">Duration</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+
+   <script>
+function updateMonitor() {
+    $.get("/get-data", function(response){
+        let tableBody = "";
+        response.data.forEach(function(row) {
+            tableBody += "<tr><th scope='row'>" + row[0] + "</th><td>" + row[1] + "</td><td>" + row[2] + "</td></tr>";
+        });
+        $('#table-body').html(tableBody);
+
+        // Set the text of the table header to the received option
+        $('#option-header').text(response.option.charAt(0).toUpperCase() + response.option.slice(1)); // Make sure the first letter is capitalized
+    });
+}
+
+// Call updateMonitor every 5 seconds
+setInterval(updateMonitor, 5000);
+</script>
+
+{% endblock %}
